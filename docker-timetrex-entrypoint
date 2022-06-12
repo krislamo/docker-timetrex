@@ -1,0 +1,10 @@
+#!/bin/bash
+
+function timetrex_set() {
+  sed -i '/^'"$1"' /s/=.*$/= '"$2"'/' /var/www/html/timetrex.ini.php
+}
+
+timetrex_set 'base_url' "${BASE_URL:=\/\/interface}"
+timetrex_set 'password' "$POSTGRES_PASSWORD"
+timetrex_set 'host'     "$POSTGRES_HOST"
+apache2-foreground
